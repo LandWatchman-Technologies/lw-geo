@@ -97,3 +97,8 @@ Calculate the distance between two geographical points.
 - **Body:** JSON object with the following field:
   - `error` (string): Error message indicating invalid parameters.
 
+### Example Request for `/distance` Endpoint
+
+**Request:**
+```bash
+curl -X GET "http://your-api-base-url/distance?lat1=40.7128&lon1=-74.0060&lat2=34.0522&lon2=-118.2437"
