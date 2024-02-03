@@ -9,19 +9,19 @@
 
 
 2. Install Requirements
-```
+```bash
 pip install -r requirements.txt
 ```
 
 ### Deployment
 Deploy on a specific port eg 8501. Default port is 8501
 
-```
+```bash
 python -m geo_distance.flask_geo_distance <port>
 ```
 
 For Example
-```
+```bash
 python -m geo_distance.flask_geo_distance 8501
 ```
 
@@ -63,7 +63,15 @@ curl -X POST -H "Content-Type: application/json" -d '{
   ]
 }' "http://your-api-base-url/distance_list"
 
-````
+```
+**Response:**
+```bash
+{
+  "distance_metres": 9692435.890490417,
+  "distance_kilometres": 9692.435890490418,
+  "distance_miles": 6023.591119249184
+}
+```
 
 ## Calculate Distance
 ### Endpoint: `/distance`
