@@ -51,6 +51,18 @@ Calculate the total distance for a list of geographical points.
 - **Body:** JSON object with the following field:
   - `error` (string): Error message indicating invalid JSON format or insufficient points.
 
+### Example Request for `/distance_list` Endpoint
+
+**Request:**
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+  "points": [
+    {"lat": 40.7128, "lon": -74.0060},
+    {"lat": 34.0522, "lon": -118.2437},
+    {"lat": 51.5074, "lon": -0.1278}
+  ]
+}' "http://your-api-base-url/distance_list"
+
 
 ## Calculate Distance
 ### Endpoint: `/distance`
