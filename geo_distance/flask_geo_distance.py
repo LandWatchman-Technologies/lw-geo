@@ -2,7 +2,7 @@ import flask
 from flask import request, jsonify
 from flask_cors import CORS
 import sys
-from geo_distance.utils.distance import calc_distance_list, calc_distance
+from geo_distance.utils.distance import calc_distance_list, calc_distance, filter_points
 
 app = flask.Flask(__name__)
 cors = CORS(app)
@@ -58,7 +58,8 @@ def distance_list():
         )
 
     try:
-        total_distance = calc_distance_list(points_list)
+        fitered_points_list = filter_points(points_list, 8, 350)
+        total_distance = calc_distance_list(fitered_points_list)
         response_dict = {
             "distance_metres": total_distance,
             "distance_kilometres": total_distance / 1000,
@@ -77,9 +78,6 @@ def distance_list():
             ),
             400,
         )
-
-
-
 
 if __name__ == "__main__":
     default_port = 8501
