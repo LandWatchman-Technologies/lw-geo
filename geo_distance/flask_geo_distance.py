@@ -58,7 +58,8 @@ def distance_list():
         )
 
     try:
-        fitered_points_list = filter_points(points_list, 8, 350)
+        # fitered_points_list = filter_points(points_list, 8, 350)
+        fitered_points_list = points_list
         total_distance = calc_distance_list(fitered_points_list)
         response_dict = {
             "distance_metres": total_distance,
