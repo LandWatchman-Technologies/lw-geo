@@ -1,8 +1,10 @@
 import flask
-from flask import request, jsonify
+from flask import request, jsonify, render_template
 from flask_cors import CORS
 import sys
-from geo_distance.utils.distance import calc_distance_list, calc_distance, filter_points
+from geo_app.utils.distance import calc_distance_list, calc_distance, filter_points
+
+from geo_app.utils.routemaps import generate_linemap
 
 app = flask.Flask(__name__)
 cors = CORS(app)
@@ -79,6 +81,56 @@ def distance_list():
             ),
             400,
         )
+
+@app.route("/routemap", methods=["POST"])
+def routemap():
+    try:
+        data = request.get_json()
+        points_list = data["points"]
+    except:
+        print("Invalid JSON")
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    if len(points_list) < 2:
+        print("Not enough points. Need at least 2 points to calculate distance")
+        return (
+            jsonify(
+                {
+                    "error": "Not enough points. Need at least 2 points to calculate distance"
+                }
+            ),
+            400,
+        )
+
+    try:
+        # fitered_points_list = filter_points(points_list, 8, 350)
+        fitered_points_list = points_list
+        # total_distance = calc_distance_list(fitered_points_list)
+        # response_dict = {
+        #     "distance_metres": total_distance,
+        #     "distance_kilometres": total_distance / 1000,
+        #     "distance_miles": total_distance / 1609.34,
+        # }
+        # print (response_dict)
+        
+        # return jsonify(response_dict), 200
+        plot = generate_linemap(fitered_points_list)
+        
+        return plot
+    
+
+    except Exception as e:
+        print(e)
+        print("Invalid JSON Format. Ensure parameters lat and lon are floats")
+        return (
+            jsonify(
+                {
+                    "error": "Invalid JSON Format. Ensure parameters lat and lon are floats"
+                }
+            ),
+            400,
+        )
+
 
 if __name__ == "__main__":
     default_port = 8501
