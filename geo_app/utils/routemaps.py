@@ -53,5 +53,7 @@ def generate_linemap(points_list):
     ))
     fig.update_layout(coloraxis_showscale=False)
     fig.layout.showlegend=False
-    html_fig = fig.to_html(config={'displaylogo': False},include_plotlyjs='cdn', full_html=False, div_id='map_location', default_width='85%', default_height='500px')
+    fig.update_layout(margin={"r":2,"t":2,"l":2,"b":2})
+    fig.update_layout(paper_bgcolor="black")
+    html_fig = fig.to_html(config={'displaylogo': False, 'modeBarButtonsToRemove': ['select', 'lasso2d', 'pan']},include_plotlyjs='cdn', full_html=False, div_id='map_location', default_width='85%', default_height='85%')
     return html_fig
