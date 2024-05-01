@@ -49,7 +49,9 @@ def generate_linemap(points_list):
         ),
         hoverinfo='text',
         text=[f"Start Point: Time: {points_list[0]['time']}", f"End Point: Time: {points_list[-1]['time']}"]
+        
     ))
-    fig.show()
-    html_fig = fig.to_html(config={'displaylogo': False},include_plotlyjs='cdn', full_html=False)
+    fig.update_layout(coloraxis_showscale=False)
+    fig.layout.showlegend=False
+    html_fig = fig.to_html(config={'displaylogo': False},include_plotlyjs='cdn', full_html=False, div_id='map_location', default_width='85%', default_height='500px')
     return html_fig
