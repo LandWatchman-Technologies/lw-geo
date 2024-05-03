@@ -19,12 +19,16 @@ def generate_linemap(points_list):
     center_lon = (lon_min + lon_max) / 2
 
     # Calculate zoom level
-    lat_dist = lat_max - lat_min
-    lon_dist = lon_max - lon_min
-    zoom_lat = math.log(360 / lat_dist) / math.log(2)
-    zoom_lon = math.log(360 / lon_dist) / math.log(2)
+    if len(points_list)>=2:
+        lat_dist = lat_max - lat_min
+        lon_dist = lon_max - lon_min
+        zoom_lat = math.log(360 / lat_dist) / math.log(2)
+        zoom_lon = math.log(360 / lon_dist) / math.log(2)
+        zoom = math.floor(min(zoom_lat, zoom_lon))
+    else:
+        zoom =20
     px.set_mapbox_access_token(os.environ.get("MAPBOX_TOKEN"))
-    zoom = math.floor(min(zoom_lat, zoom_lon))
+    
     fig = px.line_mapbox(
         points_list,
         lat="lat",

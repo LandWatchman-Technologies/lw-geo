@@ -91,7 +91,7 @@ def routemap():
         print("Invalid JSON")
         return jsonify({"error": "Invalid JSON"}), 400
 
-    if len(points_list) < 2:
+    if len(points_list) < 1:
         print("Not enough points. Need at least 2 points to calculate distance")
         return (
             jsonify(
