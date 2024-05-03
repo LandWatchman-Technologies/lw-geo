@@ -29,7 +29,7 @@ def generate_linemap(points_list):
         points_list,
         lat="lat",
         lon="lon",
-        hover_data={"lat": False, "lon": False, "time": True, "location": True},
+        hover_data={"lat": False, "lon": False, "time": True, "location_name": True},
         color_discrete_sequence=['blue'],
         zoom=zoom,
         center={"lat": center_lat, "lon": center_lon},
@@ -50,7 +50,7 @@ def generate_linemap(points_list):
         textposition="middle center",
         hoverinfo='text',
         textfont = dict(color='white', size=18),
-        hovertext=[f"<b>{points_list[0]['location']}</b><br>Time: {points_list[0]['time']}", f"<b>{points_list[-1]['location']}</b><br>Time: {points_list[-1]['time']}"],
+        hovertext=[f"<b>{points_list[0]['location_name']}</b><br>Time: {points_list[0]['time']}", f"<b>{points_list[-1]['location_name']}</b><br>Time: {points_list[-1]['time']}"],
         
     ))
     fig.update_layout(coloraxis_showscale=False, mapbox_accesstoken=os.environ.get("MAPBOX_TOKEN"))
